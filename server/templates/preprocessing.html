@@ -1,0 +1,74 @@
+{% extends "sidebar.html"%}
+{%block body%}
+    {{super()}}
+    <h2>
+        Data cleaning and preprocessing
+    </h2>
+    
+    <p>
+        <b>Cleaning: </b>
+        <br>
+        Generally, there was not a whole lot of cleaning to be done. NA values were clearly marked,
+        etc. We did rename one of the columns to better reflect the name of what was being measured
+        (gamma-glutamyl transferase) from CGT to GGT, the latter is common in the literature. This may have
+        been a typo.<br><br> 
+        
+        <b>Preprocessing: </b>
+        <br>
+        One point that must be mentioned is
+        that during part of my classification analysis, categorical values were not always
+        directly handled by the classifier algorithm that I was going to use and I resorted to one-hot encoding
+        the relevant columns when necessary.<br><br> 
+
+        Moreover, for certain methods that did not allow for missing values,
+        in which cases I imputed the values with multiple imputation after determining missingness was at random (MAR).
+        <br><br> 
+
+        We also added a column 'CategorySimple' to indicate the binary outcome of whether or not a patient has Hepatitis.
+        The '0s' suspected blood donor group is also absorbed into the main control group as well. I thought this made sense especially
+        since there were very few items in that group. The names were also altered to be more interpretable, the raw data
+        category columns were of the form e.g. '0=Blood Donor'.
+        <br><br> 
+        
+        <b> Data view</b>
+        <br>
+        Here is a preliminary view of the dataset itself:
+        {{ table|safe }}
+            
+    </p>
+{%endblock%}
+
+{%block style%}
+    {{super()}}
+    #initial{
+        overflow-y:scroll;
+        height:300px;
+        display:block;
+    }
+
+    #initial {
+        width: 100%;
+        border-color: #7EA8F8;
+        border-style: solid;
+        border-width: 2.5px;
+      }
+      
+      #initial td, #initial th {
+        padding: 4px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #7EA8F8;
+      }
+      
+      #initial thead {
+        background-color: #7EA8F8;
+      }
+{%endblock%}
+
+{%block scripts%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script>$(document).ready(function(){
+    $("#initial").tablesorter();
+  });</script>
+{%endblock%}

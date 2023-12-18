@@ -1,0 +1,62 @@
+<html>
+    <body class = "rendered_html">
+        
+        <div class="navigation-bar">
+            <a href="http://127.0.0.1:5000/">Home Page</a>
+            <a href="http://127.0.0.1:5000/dataset-information">Dataset Information</a>
+            <a href="http://127.0.0.1:5000/preprocessing">Preprocessing</a>
+            <a href="http://127.0.0.1:5000/summary-statistics">Analysis of Summary Statistics</a>
+            <a href="http://127.0.0.1:5000/visualisation-analysis">Visualisation Analyses</a>
+            <a href="http://127.0.0.1:5000/classification-analysis">Classification Analyses</a>
+        </div>
+        
+        <div class ="maintext">
+            {%block body%}
+            {%endblock%}
+        </div>
+    </body>
+
+    <style>
+        {%block style%}
+        body {
+            font-family: "Lato", sans-serif;
+          }
+        .navigation-bar {
+            overflow: hidden;
+            background-color: grey;
+            width: 140px;
+            height: 100%;
+            z_index:99999;
+
+            top: 0;
+            left: 0;
+            position: fixed;
+            padding-top: 20px
+        }
+        .maintext{
+            margin-left: 140px;
+            padding: 0px 20px
+            background-color: grey;
+            overflow:auto;
+            
+        }
+        .navigation-bar a{
+            padding: 6px 6px 6px 6px;
+            color: dark-blue;
+            display: block;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        .navigation-bar a:hover{
+            color: red
+        }
+        .navigation-bar a:visited{
+            color: dark-blue
+        }
+
+        
+        {%endblock%}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {%block scripts%} {%endblock%}
+</html>

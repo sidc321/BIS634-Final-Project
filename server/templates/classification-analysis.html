@@ -1,0 +1,160 @@
+{% extends "sidebar.html"%}
+{%block body%}
+    {{super()}}
+    <h2>Fitting classification models to the data</h2>
+    <hr>
+    Can classification models accurately predict the presence of Hepatitis C?
+    <hr>
+    Enter a classification method: <br><br>
+    <form action="/render-analysis" method="GET">
+        <select name="method" id="method">
+            <option disabled selected value>Select a value</option>
+            <option value="xgboost">XGBoost</option>
+            <option value="svc">Support Vector Classifier</option>
+            <option value="ridge">Ridge Classifier</option>
+            <option value="logistic">L2-Penalised Multinomial Regression</option>
+        </select>
+        <br><br>
+        <label for="checkbox"></label>Classify on simple response? (Only 2 categories)
+        <input type="checkbox" id="simple" name="simple" value="True">
+        <br>
+        <br>
+        Automatically tune Hyperameter? 
+        <br>
+        <input type="radio" id="tuneyes" name="tune" value="1">
+        <label for="tune">Yes</label><br>
+        <input type="radio" id="tuneno" name="tune" value="0">
+        <label for="tune">No</label><br>  
+        <br>
+        <label for="hypervalue" id ="hypervaluetext" style="display:none">Enter Hyperameter Value:</label>
+        <input type="number" step="0.0000001" id="hypervalue" name="hypervalue" style="display:none">
+        <br>
+        <label for="checkbox"></label>Include Confusion matrix?
+        <input type="checkbox" id="confusion" name="confusion" value="True">
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <hr>
+    <h3>Handling Missing Data & Categeorical variables</h3>
+    <p>
+        We employed multiple imputation whenever needed with 10 rounds of iterations to impute new values.
+        This should help capture the effects of some of the MAR we observed. 
+        <br><br>
+        Categeorical variables were one-hot encoded when needed.
+    </p>
+
+    <h3>Hyperparameter Tuning Details</h3>
+    <p>
+        The following hyperparameters are being tuned for the above methods:
+        <ul>
+            <li><b>XGBoost</b>: None</li>
+            <li><b>Support Vector Classifier</b>: C, the penalty term for the L-2 norm penalty</li>
+            <li><b>Ridge Classifier</b>: λ, the standard penalty term for ridge regression </li>
+            <li><b>Multinomial Classifier</b>: 1/C, where  C is the coeffecient of the l2-norm</li>
+        </ul>
+    </p>
+
+    <p>
+        In general, the methods have been tuned using <b>5-fold stratified sampled cross-validation</b>.</p>
+    <h4>Stratified Sampling</h4>    
+    <p>
+        We are using stratified sampling in this case since the healthy group represent a very large proportion of the data. When
+        we combine this with cross validation, some of our folds will have very few patients with hepatitis. Stratified
+        sampling here aims to rectify this issue by trying to guarantee all of the folds have proportions of items in each category.
+    </p>
+    <hr>
+    <h3>Results</h3>
+    We display the results of using each of our 4 classifiers (tuning parameters when necessary). We average the errors over 
+    <b>100</b> simulations and display the outputs in the table below:
+    
+    <table class="niceTable">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Balanced Accuracy on Category</th>
+            <th>Balanced Accuracy on CategorySimple</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>XGBoost</td>
+            <td>65.6%</td>
+            <td>94.9%</td>
+          </tr>
+          <tr>
+            <td>Support Vector Classifier</td>
+            <td>44.7%</td>
+            <td>82.1%</td>
+          </tr>
+          <tr>
+            <td>Ridge Classifier</td>
+            <td>42.6%</td>
+            <td>71.3%</td>
+          </tr>
+          <tr>
+            <td>Multinomial Classifier</td>
+            <td>59.7%</td>
+            <td>85.3%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>From this we can see that the performance of XGBoost is superior comapred 
+        to the other methods, however, all methods have reasonably high accuracy on
+        the 2 category classification problem.
+        <br><br>
+        We do note, however that all methods performed relatively poorly on the multi cateogry classification,
+        with in general much lower scores. We saw this on the confusion matrix as well, that although we were able
+        to differentiate between the hepatitis vs. non-hepatitis categories, the exact determination of the stage of
+        disease was much poorer.
+
+      </p>
+      
+      
+{%endblock%}
+
+{%block style%}
+{{super()}}
+table.niceTable {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-width: 2px;
+  }
+  
+  table.niceTable td, table.niceTable th {
+    padding: 4px;
+    border-width: 2.5px;
+    border-color: #7EA8F8;
+    border-style: solid;
+    
+  }
+  
+  table.niceTable thead {
+    background-color: #7EA8F8;
+  }
+  
+{%endblock%}
+
+{%block scripts%}
+    {{super()}}
+    <script>
+        const hyperTune = document.querySelector('#tuneyes');
+        const hyperTune2 = document.querySelector('#tuneno');
+
+        hyperTune.addEventListener('change', hyperTuneCheck);
+        hyperTune2.addEventListener('change', hyperTuneCheck);
+
+        function hyperTuneCheck(){
+            
+            if(document.getElementById("tuneyes").checked){
+                document.getElementById("hypervalue").style.display = "none";
+                document.getElementById("hypervaluetext").style.display = "none";
+            } else if(document.getElementById("tuneno").checked){
+                document.getElementById("hypervalue").style.display = "block";
+                document.getElementById("hypervaluetext").style.display = "block";
+            }
+        }
+
+        simple
+    </script>
+{%endblock%}

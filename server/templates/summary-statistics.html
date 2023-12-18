@@ -1,0 +1,81 @@
+{% extends "sidebar.html"%}
+{%block body%}
+    {{super()}}
+    <h2>
+        Analysis of Summary Statistics
+    </h2>
+
+    <h3>General summary statistics</h3>
+
+    <p>Overall Summary Statistics</p>
+    <img src="static/OverallSummary.png" width="70%">
+    
+    <p>
+        We see that the standard deviations of ALP, AST and BIL are relatively high compared to their
+        means. This could possibly be because there is a skewing from the Hepatitis patients and we will
+        investigate this further.
+        
+        We also note that the dataset has some degree of missingness and we further analyse
+        the missingness later. The column with the highest degree of missingness is 'ALP'.
+    </p>
+    <h4>Visual summary statistics</h4>
+
+    {{SCAT_SUM|safe}}
+
+    <h3>Comparison between the two groups</h3>
+    <div class="sidebyside">
+        <div class="imgside">
+            <p>Summary Statistics for Hepatitis patients</p>
+            <img src="static/HepSummary.png" width = "100%">
+        </div>
+        <div class="imgside">
+            <p>Summary Statistics for healthy patients</p>
+            <img src="static/HealthySummary.png" width="100%">
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br>
+    <p>
+        We can immediately see some pretty key striking differences between the
+        two groups. The most striking finding is that Hepatitis patients have
+        on average, significantly higher values of AST (liver enzyme) and BIL
+        (byproduct of blood breakdown).
+        
+    </p>
+ 
+{%endblock%}
+
+{%block style%}
+{{super()}}
+.imgside{
+    float:left;
+    width: 50%;
+    padding=10px;
+}
+.sidebyside::after {
+    content: "";
+    display: table;
+  }
+
+.jitterfig{
+    float:left;
+    width: 30%;
+    padding=10px;
+}
+
+.jitter::after {
+    content: "";
+    display: table;
+  }
+
+  .pie{
+    float:left;
+    width: 50%;
+    padding=20px;
+}
+
+.pieside::after {
+    content: "";
+    display: table;
+  }
+{%endblock%}

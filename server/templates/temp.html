@@ -1,0 +1,65 @@
+<html>
+    <body>
+        <div class="navigation-bar">
+            <a class="active" href="#home">Home Page</a>
+            <a href="#license">Dataset Information</a>
+            <a href="#news">Summary Statistics</a>
+            <a href="#contact">Classification Analyses</a>
+            <a href="#about">Visualisation</a>
+            <a href="#license">Licensing Information</a>
+        </div>
+
+        <div class ="main">
+            
+        <h1>Home Page</h1>
+            <p>
+                This project is primarily concerned with being able to classify
+                patients on whether or not they have hepatitis C based on a variety
+                of different patient data.
+            </p>
+            <p>
+                It is estimated that yearly around 15000 Americans die annually form
+                Hepatitis C and worldwide, that figure is around 290000. Most deaths occur
+                from liver cirrhosis and liver cancer, so our study aims to classify on
+                multiple types of Hepatitis C categorisations.
+            </p>
+            <form action="/info" method="GET">
+                <textarea style="width:100%; height: 10em" name="state"></textarea>
+                <br>
+                <input type="submit" value="Get Info">
+            </form>
+        </div>
+    </body>
+
+    <style>
+        /* change*/
+        body {
+            font-family: "Lato", sans-serif;
+          }
+        .navigation-bar {
+            overflow: hidden;
+            background-color: grey;
+            width: 140px;
+            height: 100%;
+            
+
+            top: 0;
+            left: 0;
+            position: fixed;
+            padding-top: 20px
+        }
+        .navigation-bar a{
+            padding: 6px 6px 6px 6px;
+            
+            color: light-blue;
+            display: block;
+            font-size: 20px;
+        }
+        .main{
+            margin-left: 140px;
+            padding: 0px 20px;
+            background-color: blue;
+        }
+  
+    </style>
+</html>

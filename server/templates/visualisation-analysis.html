@@ -1,0 +1,103 @@
+{% extends "sidebar.html"%}
+{%block body%}
+    {{super()}}
+
+    <h3>Imbalanced groups by Sex and Disease</h3>
+    <p>We note that the groups are highly imbalanced with regards to both the sex ratio and the 
+        ratio of those with the disease and those without:
+        <br><br>
+        <b>There are 75 patients with the disease and 540 without.</b>
+        <br>
+        <b>There are 337 male patients and 278 female patients.</b>
+    </p>
+    <div class = "pieside">
+        <div class = "pie">
+            <p>HCV prevalence for women</p>
+            {{IMBAL_MEN|safe}}
+        </div>
+        <div class = "pie">
+            <p>HCV prevalence for men</p>
+            {{IMBAL_WOMEN|safe}}
+        </div>
+    </div>
+
+    <h3>Analysis of missing data</h3>
+    <p>From our interactive table (and summary statistics), we could see that most of our missing
+        data came from the ALP column. We are going to analyse the presence of hepatitis amongst
+        groups with and without a missing value for ALP.
+    </p>
+    <div class = "pieside">
+        <div class = "pie">
+            <p>Pie chart for missing ALP value</p>
+            {{NAPIE|safe}}
+        </div>
+        <div class = "pie">
+            <p>Pie chart for no missing ALP value</p>
+            {{NOTNAPIE|safe}}
+        </div>
+    </div>
+    
+    
+
+    <p>From this, we can see the missingness in this column is MAR(Missing at random) 
+        since all the data when the ALP value was missing corresponded to patients with
+        Hepatitis.
+    </p>
+
+    <h3>Further Analysis of BIL and AST levels</h3>
+    <p>
+        <u>How do the BIL and AST levels relate to the prevalence of Hepatitis C?</u>
+    </p>
+    <div class = "jitter">
+        <div class = "jitterfig">
+            {{ALT|safe}}
+        </div>
+        <div class = "jitterfig">
+            {{AST|safe}}
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
+    
+    <p>So we can clearly see a strong link between the AST and BIL levels and the 
+        presence of Hepatitis. This is especially the case with AST with most 
+        high values being marked as having Hepatitis.
+    </p>
+{%endblock%}
+
+
+{%block style%}
+{{super()}}
+.imgside{
+    float:left;
+    width: 50%;
+    padding=10px;
+}
+.sidebyside::after {
+    content: "";
+    display: table;
+  }
+
+.jitterfig{
+    float:left;
+    width: 30%;
+    padding=10px;
+}
+
+.jitter::after {
+    content: "";
+    display: table;
+  }
+
+  .pie{
+    float:left;
+    width: 50%;
+    padding=20px;
+}
+
+.pieside::after {
+    content: "";
+    display: table;
+  }
+{%endblock%}

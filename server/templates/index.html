@@ -1,0 +1,48 @@
+{% extends "sidebar.html"%}
+{%block body%}
+    {{ super() }}
+    <h1>Home Page</h1>
+        <p>
+            This project is primarily concerned with being able to classify
+            patients on whether or not they have hepatitis C based on a variety
+            of different patient data.
+        </p>
+        <p>
+            Hepatitis C is a liver infection spread by contact with blood. It is estimated that yearly around 15000 Americans die annually form
+            Hepatitis C and worldwide, that figure is around 290000. If caught early, treatment with antiviral tablets will be administered and 
+            the prognosis is typically very good. If left untreateed, typical progression of the disease begins with 
+            inflammation of the liver followed by milk scarring. At this stage, symptoms might be completely unnoticeable or mild. This can 
+            progress into more serious liver scarring and fibrosis (accumulation of scar tissue) which ultimately leads to cirrhosis of the liver
+            (when scar tissue is extremely prevalent). This hinders liver function and will increase the risk of liver cancer.
+            Most deaths occur at the stage of liver cirrhosis and liver cancer, and as a result, our study aims to classify on
+            multiple types of Hepatitis C categorisations to attempt to delineate the severity of disease.
+        </p>
+
+        <p>Our analysis is two-fold and aims to identify and visualise the risk factors and how they relate to
+            having hepatitis C or not. In addition to this, we will aim to determine the efficacy of 
+            different classification schemes at predicting whether or not a given patient will have hepaitis C.
+        </p>
+        <div class="hepside">
+            <img src = "static/hepprogress.jpeg" width = "40%" class="hep"></img>
+            <img src = "static/hcvusa.png" width = "50%" class="hep"></img>
+        </div>
+        <div> 
+            <img src = "static/trends.png" width = "40%"></img>
+        </div>
+        <br><br><br>
+{%endblock%}
+
+{%block style%}
+    {{super()}}
+    .hepside1 {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 80px; 
+    }
+
+    .hepside {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+{%endblock%}

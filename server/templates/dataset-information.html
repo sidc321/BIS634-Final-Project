@@ -1,0 +1,51 @@
+{% extends "sidebar.html"%}
+{%block body%}
+    {{super()}}
+<h2>
+    Hepatitis C Dataset
+</h2>
+<p>
+    This dataset is taken from Lichtinghagen,Ralf, Klawonn,Frank, and Hoffmann,Georg. (2020). HCV data. UCI Machine Learning Repository. 
+    <a href= "https://doi.org/10.24432/C5D612">https://doi.org/10.24432/C5D612</a> <i>Using machine learning techniques to generate laboratory diagnostic pathways—a case study</i>. 
+    This sources underlying data from <br><br>
+    Lichtinghagen, R., Pietsch, D., Bantel, H., Manns, M. P., Brand, K., &amp; Bahr, M. J. (2013). The enhanced liver fibrosis (ELF) score: Normal values, influence factors and proposed cut-off values. Journal of Hepatology, 59(2), 236–242. 
+    <a href="https://doi.org/10.1016/j.jhep.2013.03.016">https://doi.org/10.1016/j.jhep.2013.03.016 </a>
+    <br><br>
+    The data contains a sample of 540 healthy patients
+    and 75 patients who were diagnosed with hepatitis C.<br><br> The healthy volunteers were recruited
+    from Hannover Medical School and were exmained prior to being included in the study for factors such
+    as liver disease, alcoholism, renal function and Hepatitis C itself (amongst other things). Participation
+    was entirely voluntary and all patients gave written consent. Patients underwent a blood test which measured
+    a variety of demographic data as well as liver function analysis, including liver enzyme activity, etc.
+    <br><br>
+    The following information about each of the patients was taken:
+    <ul>
+        <li><b>Age</b>: Exact age in years</li>
+        <li><b>Sex</b>: [male,female] </li>
+        <li><b>ALB</b>: Albumin (g/L)</li>
+        <li><b>ALP</b>: Alkaline Phosphatase (IU/L)</li>
+        <li><b>ALT</b>:Alanine Transaminase (IU/L)</li>
+        <li><b>AST</b>: Aspartate Aminotransferase(IU/L)</li>
+        <li><b>BIL</b>: Bilirubin (µmol/L)</li>
+        <li><b>CHE</b>: Acetylcholinesterase(IU/L)</li>
+        <li><b>CHOL</b>: Cholesterol(mmol/L)</li>
+        <li><b>CREA</b>: Creatinine(µmol/L)</li>
+        <li><b>CGT</b>: Gamma-glutamyl Transferase(U/L)</li>
+        <li><b>PROT</b>: Protein(g/L)</li>
+    </ul>
+    The response variable was classified into 5 categories:
+    <br>
+    
+    <ul>
+        <li>Blood donor('0')</li>
+        <li>Suspected blood donor ('0s')</li>
+        <li>Hepatitis ('1')</li>
+        <li>Fibrosis ('2')</li>
+        <li>Cirrhosis ('3')</li>
+    </ul>
+    where the various levels denote the progression of Hepatitis C
+</p>
+
+
+
+{%endblock%}
